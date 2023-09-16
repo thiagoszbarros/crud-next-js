@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { HiOutlineTrash } from "react-icons/hi"
-import { HiPencilAlt } from "react-icons/hi";
+import { HiOutlineTrash, HiPencilAlt } from "react-icons/hi"
+import { RiMailSendLine } from 'react-icons/ri';
 
 export default async function EventsList() {
 
@@ -28,12 +28,15 @@ export default async function EventsList() {
                         </div>
 
                         <div className="flex gap-2">
-                        <button className="text-red-400">
-                            <HiOutlineTrash size={24} />
-                        </button>
-                            <Link href={'/events/edit/1'}>
+                            <Link href={`/events/${event.id}/subscribers`}>
+                                <RiMailSendLine size={24} />
+                            </Link>
+                            <Link href={`/events/edit/${event.id}`}>
                                 <HiPencilAlt size={24} />
                             </Link>
+                            <button className="text-red-400">
+                                <HiOutlineTrash size={24} />
+                            </button>
                         </div>
                     </div>
                 ))}
@@ -56,7 +59,7 @@ async function getEvents() {
         const events = data.data
         return events
     } catch (error) {
-        return [{}]
+        return []
     }
 }
 
