@@ -20,7 +20,7 @@ export default async function EventsList() {
                 <Link className='text-center bg-blue-600 font-bold text-white px-8 py-2' href={'/events/create'}>Criar</Link>
 
                 {events.map((event: Event) => (
-                    <div className='p-4 border border-slate-300 my-3 flex justify-between gap-5 items-center'>
+                    <div key={event.id} className='p-4 border border-slate-300 my-3 flex justify-between gap-5 items-center'>
                         <div>
                             <h2 className='font-bold text-2xl'>{event.name}</h2>
                             <div>De {dateToBrazilianLocation(event.start_date)} até {dateToBrazilianLocation(event.end_date)} </div>

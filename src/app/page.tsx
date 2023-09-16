@@ -14,7 +14,7 @@ export default async function EventsList() {
     return (
         <>
             {events.map((event: Event) => (
-                <div className='p-4 border border-slate-300 my-3 flex justify-between gap-5 items-center'>
+                <div key={event.id} className='p-4 border border-slate-300 my-3 flex justify-between gap-5 items-center'>
                     <div>
                         <h2 className='font-bold text-2xl'>{event.name}</h2>
                         <div>De {brazilianStandard(event.start_date)} até {brazilianStandard(event.end_date)} </div>
