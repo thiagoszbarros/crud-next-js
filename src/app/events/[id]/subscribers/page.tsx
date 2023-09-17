@@ -1,6 +1,10 @@
 import Link from "next/link"
+import { API_URL } from "../../../../../config";
 
-export default async function subscribersList() {
+export default async function subscribersList({ params }: any) {
+
+    const { id } = params;
+
     type Subscriber = {
         id: number,
         name: string,
@@ -8,7 +12,7 @@ export default async function subscribersList() {
         cpf: string,
     }
 
-    const subscribers: Subscriber[] = await getSubscribers();
+    const subscribers: Subscriber[] = await getSubscribers(id);
 
     return (
         <>
@@ -28,23 +32,22 @@ export default async function subscribersList() {
     )
 }
 
-async function getSubscribers() {
+async function getSubscribers(id: string) {
     try {
+        const response = await fetch(`${API_URL}/api/events/${id}/subscribers?event_id=${id}`, {
+            cache: 'no-store'
+        })
 
-        return [
-            {
-                id: 1,
-                name: 'John Doe',
-                email: 'jonh@doe.com',
-                cpf: '99999999999',
-            },
-            {
-                id: 2,
-                name: 'John Doe',
-                email: 'jonh@doe.com',
-                cpf: '99999999999',
-            },
-        ]
+        const data = await response.json()
+
+        const subscribers = data.data
+
+        if (!response.ok) {
+            alert(data.data)
+            return
+        }
+
+        return subscribers
     } catch (error) {
         return []
     }
