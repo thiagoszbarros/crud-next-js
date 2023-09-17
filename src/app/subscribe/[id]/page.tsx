@@ -44,7 +44,7 @@ export default function subscribe({ params }: any) {
             }
 
             alert(data.data)
-            router.push('/events')
+            router.push('/')
             router.refresh()
 
         } catch (error) {
