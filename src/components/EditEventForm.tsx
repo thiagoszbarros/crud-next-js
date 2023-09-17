@@ -6,7 +6,7 @@ import { API_URL } from "../../config";
 
 
 
-export default function EventInput({ id, name, startDate, endDate }: any) {
+export default function EditEventForm({ id, name, startDate, endDate }: any) {
 
     const [newName, setNewName] = useState(name);
     const [newStartDate, setNewStartDate] = useState(startDate);
