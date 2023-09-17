@@ -1,7 +1,7 @@
 import { API_URL } from "../../../../../config";
 import EventInput from "@/components/EventInput";
 
-export default async function Edit({ params }: any) {
+export default async function edit({ params }: any) {
     type Event = {
         id: number,
         name: string,
