@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { API_URL } from "../../../../config";
 
-export default function create() {
+export default function Create() {
 
     const [name, setName] = useState('')
     const [startDate, setStartDate] = useState('')

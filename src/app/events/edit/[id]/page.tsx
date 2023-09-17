@@ -9,7 +9,7 @@ type Event = {
     status: boolean
 }
 
-export default async function edit({ params }: any) {
+export default async function Edit({ params }: any) {
 
     const { id } = params;
     const event: Event = await getEvent(id)

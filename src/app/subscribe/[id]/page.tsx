@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { API_URL } from "../../../../config";
 
-export default function subscribe({ params }: any) {
+export default function Subscribe({ params }: any) {
 
     const { id } = params;
     const [name, setName] = useState('')
