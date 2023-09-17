@@ -1,11 +1,14 @@
+'use client'
+
 import Link from "next/link";
 import { HiOutlineTrash, HiPencilAlt } from "react-icons/hi"
 import { RiMailSendLine } from 'react-icons/ri';
+import { API_URL } from "../../../config";
 
 export default async function EventsList() {
 
     type Event = {
-        id: number,
+        id: string,
         name: string,
         start_date: string,
         end_date: string,
@@ -23,7 +26,7 @@ export default async function EventsList() {
                     <div key={event.id} className='p-4 border border-slate-300 my-3 flex justify-between gap-5 items-center'>
                         <div>
                             <h2 className='font-bold text-2xl'>{event.name}</h2>
-                            <div>De {dateToBrazilianLocation(event.start_date)} até {dateToBrazilianLocation(event.end_date)} </div>
+                            <div>De {event.start_date} até {event.end_date} </div>
                             <div>{event.status}</div>
                         </div>
 
@@ -34,7 +37,7 @@ export default async function EventsList() {
                             <Link href={`/events/edit/${event.id}`}>
                                 <HiPencilAlt size={24} />
                             </Link>
-                            <button className="text-red-400">
+                            <button onClick={() => deleteEvent(event.id)} className="text-red-400" id={event.id}>
                                 <HiOutlineTrash size={24} />
                             </button>
                         </div>
@@ -47,22 +50,42 @@ export default async function EventsList() {
 
 async function getEvents() {
     try {
-        const response = await fetch('https://demo.ws.itarget.com.br/event.php', {
+        const response = await fetch(`${API_URL}/api/events`, {
             cache: 'no-store'
         })
 
-        if (!response.ok) {
-            throw new Error('Houve um erro ao buscar os eventos.')
-        }
-
         const data = await response.json()
         const events = data.data
+
+        if (!response.ok) {
+            alert(data.data)
+            return
+        }
+
         return events
     } catch (error) {
         return []
     }
 }
 
-function dateToBrazilianLocation(date: string) {
-    return new Date(date).toLocaleDateString('pt-BR')
+async function deleteEvent(id: string) {
+    const confirmed = confirm('Tem certeza que deseja deletar esse evento?')
+
+    if (!confirmed) {
+        return
+    }
+
+    const response = await fetch(`${API_URL}/api/events/${id}`, {
+        method: 'DELETE'
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+        alert(data.data)
+        return
+    }
+
+    alert(data.data)
+    location.reload()
 }

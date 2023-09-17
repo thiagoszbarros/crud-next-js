@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { RiMailSendLine } from 'react-icons/ri';
+import { API_URL } from '../../config';
 
 export default async function EventsList() {
     type Event = {
@@ -17,7 +18,7 @@ export default async function EventsList() {
                 <div key={event.id} className='p-4 border border-slate-300 my-3 flex justify-between gap-5 items-center'>
                     <div>
                         <h2 className='font-bold text-2xl'>{event.name}</h2>
-                        <div>De {brazilianStandard(event.start_date)} até {brazilianStandard(event.end_date)} </div>
+                        <div>De {event.start_date} até {event.end_date} </div>
                         <div>{event.status}</div>
                     </div>
 
@@ -36,7 +37,7 @@ export default async function EventsList() {
 
 async function getEvents() {
     try {
-        const response = await fetch('https://demo.ws.itarget.com.br/event.php', {
+        const response = await fetch(`${API_URL}/api/events`, {
             cache: 'no-store'
         })
 
@@ -48,10 +49,6 @@ async function getEvents() {
         const events = data.data
         return events
     } catch (error) {
-        return [{}]
+        return []
     }
-}
-
-function brazilianStandard(date: string) {
-    return new Date(date).toLocaleDateString('pt-BR')
 }
