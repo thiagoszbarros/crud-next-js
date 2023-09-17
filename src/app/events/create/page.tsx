@@ -45,7 +45,7 @@ export default function create() {
             router.refresh()
 
         } catch (error) {
-
+            return
         }
     }
 

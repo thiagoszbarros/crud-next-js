@@ -2,14 +2,15 @@ import Link from 'next/link';
 import { RiMailSendLine } from 'react-icons/ri';
 import { API_URL } from '../../config';
 
+type Event = {
+    id: number,
+    name: string,
+    start_date: string,
+    end_date: string,
+    status: boolean
+}
+
 export default async function EventsList() {
-    type Event = {
-        id: number,
-        name: string,
-        start_date: string,
-        end_date: string,
-        status: boolean
-    }
     const events = await getEvents()
 
     return (
@@ -41,13 +42,14 @@ async function getEvents() {
             cache: 'no-store'
         })
 
+        const data = await response.json()
+
         if (!response.ok) {
-            throw new Error('Houve um erro ao buscar os eventos.')
+            alert(data.data)
+            return
         }
 
-        const data = await response.json()
-        const events = data.data
-        return events
+        return data.data
     } catch (error) {
         return []
     }

@@ -4,16 +4,15 @@ import { RiMailSendLine } from 'react-icons/ri';
 import { API_URL } from "../../../config";
 import DeleteButton from "@/components/DeleteButton";
 
+type Event = {
+    id: string,
+    name: string,
+    start_date: string,
+    end_date: string,
+    status: boolean
+}
+
 export default async function EventsList() {
-
-    type Event = {
-        id: string,
-        name: string,
-        start_date: string,
-        end_date: string,
-        status: boolean
-    }
-
     const events = await getEvents()
 
     return (
@@ -36,7 +35,7 @@ export default async function EventsList() {
                             <Link href={`/events/edit/${event.id}`}>
                                 <HiPencilAlt size={24} />
                             </Link>
-                            <DeleteButton id={event.id}/>
+                            <DeleteButton id={event.id} />
                         </div>
                     </div>
                 ))}

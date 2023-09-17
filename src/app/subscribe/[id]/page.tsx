@@ -8,7 +8,6 @@ import { API_URL } from "../../../../config";
 export default function subscribe({ params }: any) {
 
     const { id } = params;
-
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [CPF, setCPF] = useState('')
@@ -48,7 +47,7 @@ export default function subscribe({ params }: any) {
             router.refresh()
 
         } catch (error) {
-
+            return
         }
     }
 

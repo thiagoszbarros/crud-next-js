@@ -1,17 +1,16 @@
 import Link from "next/link"
 import { API_URL } from "../../../../../config";
 
+type Subscriber = {
+    id: number,
+    name: string,
+    email: string,
+    cpf: string,
+}
+
 export default async function subscribersList({ params }: any) {
 
     const { id } = params;
-
-    type Subscriber = {
-        id: number,
-        name: string,
-        email: string,
-        cpf: string,
-    }
-
     const subscribers: Subscriber[] = await getSubscribers(id);
 
     return (
@@ -39,15 +38,13 @@ async function getSubscribers(id: string) {
         })
 
         const data = await response.json()
-
-        const subscribers = data.data
-
         if (!response.ok) {
             alert(data.data)
             return
-        }
 
-        return subscribers
+        }
+        return data.data
+
     } catch (error) {
         return []
     }
