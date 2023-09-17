@@ -1,9 +1,8 @@
-'use client'
-
 import Link from "next/link";
-import { HiOutlineTrash, HiPencilAlt } from "react-icons/hi"
+import { HiPencilAlt } from "react-icons/hi"
 import { RiMailSendLine } from 'react-icons/ri';
 import { API_URL } from "../../../config";
+import DeleteButton from "@/components/DeleteButton";
 
 export default async function EventsList() {
 
@@ -37,9 +36,7 @@ export default async function EventsList() {
                             <Link href={`/events/edit/${event.id}`}>
                                 <HiPencilAlt size={24} />
                             </Link>
-                            <button onClick={() => deleteEvent(event.id)} className="text-red-400" id={event.id}>
-                                <HiOutlineTrash size={24} />
-                            </button>
+                            <DeleteButton id={event.id}/>
                         </div>
                     </div>
                 ))}
@@ -66,26 +63,4 @@ async function getEvents() {
     } catch (error) {
         return []
     }
-}
-
-async function deleteEvent(id: string) {
-    const confirmed = confirm('Tem certeza que deseja deletar esse evento?')
-
-    if (!confirmed) {
-        return
-    }
-
-    const response = await fetch(`${API_URL}/api/events/${id}`, {
-        method: 'DELETE'
-    })
-
-    const data = await response.json()
-
-    if (!response.ok) {
-        alert(data.data)
-        return
-    }
-
-    alert(data.data)
-    location.reload()
 }
