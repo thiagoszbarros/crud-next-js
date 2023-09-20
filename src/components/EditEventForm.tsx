@@ -36,7 +36,6 @@ export default function EditEventForm({ id, name, startDate, endDate }: any) {
             });
 
             const data = await response.json();
-            console.log(response);
             if (!response.ok) {
                 alert(data.data);
                 return;
@@ -47,6 +46,7 @@ export default function EditEventForm({ id, name, startDate, endDate }: any) {
             router.refresh();
 
         } catch (error) {
+            return
         }
     };
 
