@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { API_URL } from "../../../../config";
+import { API_URL } from "../../../../../config";
 
 export default function Subscribe({ params }: any) {
 

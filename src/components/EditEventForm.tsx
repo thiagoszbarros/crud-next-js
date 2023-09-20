@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { API_URL } from "../../config";
+import { CLIENT_API_URL } from "../../config";
 
 
 
@@ -18,7 +18,7 @@ export default function EditEventForm({ id, name, startDate, endDate }: any) {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${API_URL}/api/events/${id}`, {
+            const response = await fetch(`${CLIENT_API_URL}/api/events/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',

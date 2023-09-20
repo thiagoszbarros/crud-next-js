@@ -32,7 +32,7 @@ export default async function EventsList() {
                             <Link href={`/events/${event.id}/subscribers`}>
                                 <RiMailSendLine size={24} />
                             </Link>
-                            <Link href={`/events/edit/${event.id}`}>
+                            <Link href={`/events/${event.id}/edit`}>
                                 <HiPencilAlt size={24} />
                             </Link>
                             <DeleteButton id={event.id} />

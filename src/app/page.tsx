@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { RiMailSendLine } from 'react-icons/ri';
 import { API_URL } from '../../config';
 
+
 type Event = {
     id: number,
     name: string,
@@ -24,7 +25,7 @@ export default async function EventsList() {
                     </div>
 
                     <div className='flex gap-2 justify-between'>
-                        <Link className='p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start cursor-pointer' href={`/subscribe/${event.id}`}>
+                        <Link className='p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start cursor-pointer' href={`events/${event.id}/subscribe`}>
                             <label className='cursor-pointer'>Inscrição</label>
                             <RiMailSendLine size={24} />
                         </Link>

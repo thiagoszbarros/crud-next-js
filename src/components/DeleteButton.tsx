@@ -1,7 +1,6 @@
 'use client'
-
 import { HiOutlineTrash } from "react-icons/hi"
-import { API_URL } from "../../config";
+import { CLIENT_API_URL } from "../../config";
 import { useRouter } from 'next/navigation';
 
 export default function DeleteButton({ id }: any) {
@@ -13,7 +12,7 @@ export default function DeleteButton({ id }: any) {
             return
         }
 
-        const response = await fetch(`${API_URL}/api/events/${id}`, {
+        const response = await fetch(`${CLIENT_API_URL}/api/events/${id}`, {
             method: 'DELETE'
         })
 
