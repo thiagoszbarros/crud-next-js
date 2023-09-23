@@ -4,6 +4,9 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { NEXT_PUBLIC_CLIENT_API_URL } from "../../../../config";
+import React from "react"
+import InputMask from "react-input-mask";
+import { removeDateMask } from "@/components/Utils";
 
 export default function Create() {
 
@@ -28,8 +31,8 @@ export default function Create() {
                 mode: 'cors',
                 body: JSON.stringify({
                     name: name,
-                    start_date: startDate,
-                    end_date: endDate
+                    start_date: removeDateMask(startDate),
+                    end_date: removeDateMask(endDate)
                 })
             })
 
@@ -57,20 +60,22 @@ export default function Create() {
             placeholder="Nome do evento"
             required
         />
-        <input
+        <InputMask
+            mask="99/99/9999"
             onChange={(e) => setStartDate(e.target.value)}
             value={startDate}
             className="border border-slate-500 px-8 py-2"
             type="text"
-            placeholder="Data de início (yyyy-mm-dd)"
+            placeholder="Data de início"
             required
         />
-        <input
+        <InputMask
+            mask="99/99/9999"
             onChange={(e) => setEndDate(e.target.value)}
             value={endDate}
             className="border border-slate-500 px-8 py-2"
             type="text"
-            placeholder="Data do fim (yyyy-mm-dd)"
+            placeholder="Data do fim"
             required
         />
         <button type="submit" className="bg-green-600 font-bold text-white px-8 py-2">

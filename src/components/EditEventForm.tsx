@@ -1,22 +1,31 @@
 'use client';
+
+
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { NEXT_PUBLIC_CLIENT_API_URL } from "../../config";
+import React from "react"
+import InputMask from "react-input-mask";
+import { addDateMask, removeDateMask } from "./Utils";
 
 
 
 export default function EditEventForm({ id, name, startDate, endDate }: any) {
 
     const [newName, setNewName] = useState(name);
-    const [newStartDate, setNewStartDate] = useState(startDate);
-    const [newEndDate, setNewEndDate] = useState(endDate);
+    const [newStartDate, setNewStartDate] = useState(addDateMask(startDate));
+    const [newEndDate, setNewEndDate] = useState(addDateMask(endDate));
 
     const router = useRouter();
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-
+        console.log({
+            name: newName,
+            start_date: removeDateMask(newStartDate),
+            end_date: removeDateMask(newEndDate)
+        })
         try {
             const response = await fetch(`${NEXT_PUBLIC_CLIENT_API_URL}/api/events/${id}`, {
                 method: 'PUT',
@@ -30,8 +39,8 @@ export default function EditEventForm({ id, name, startDate, endDate }: any) {
                 mode: 'cors',
                 body: JSON.stringify({
                     name: newName,
-                    start_date: newStartDate,
-                    end_date: newEndDate
+                    start_date: removeDateMask(newStartDate),
+                    end_date: removeDateMask(newEndDate)
                 })
             });
 
@@ -57,10 +66,14 @@ export default function EditEventForm({ id, name, startDate, endDate }: any) {
                     onChange={e => setNewName(e.target.value)}
                     value={newName}
                     className="border border-slate-500 px-8 py-2" type="text" placeholder="Nome do evento" required />
-                <input onChange={e => setNewStartDate(e.target.value)}
+                <InputMask
+                    mask="99/99/9999"
+                    onChange={e => setNewStartDate(e.target.value)}
                     value={newStartDate}
                     className="border border-slate-500 px-8 py-2" type="text" placeholder="Data de início" required />
-                <input onChange={e => setNewEndDate(e.target.value)}
+                <InputMask
+                    mask="99/99/9999"
+                    onChange={e => setNewEndDate(e.target.value)}
                     value={newEndDate}
                     className="border border-slate-500 px-8 py-2" type="text" placeholder="Data do fim" required />
 
