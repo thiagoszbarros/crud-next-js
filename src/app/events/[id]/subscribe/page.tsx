@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { CLIENT_API_URL } from "../../../../../config";
+import { NEXT_PUBLIC_CLIENT_API_URL } from "../../../../../config";
 
 export default function Subscribe({ params }: any) {
 
@@ -17,7 +17,7 @@ export default function Subscribe({ params }: any) {
         e.preventDefault()
 
         try {
-            const response = await fetch(`${CLIENT_API_URL}/api/subscribers`, {
+            const response = await fetch(`${NEXT_PUBLIC_CLIENT_API_URL}/api/subscribers`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

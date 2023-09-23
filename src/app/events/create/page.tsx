@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { CLIENT_API_URL } from "../../../../config";
+import { NEXT_PUBLIC_CLIENT_API_URL } from "../../../../config";
 
 export default function Create() {
 
@@ -16,7 +16,7 @@ export default function Create() {
         e.preventDefault()
 
         try {
-            const response = await fetch(`${CLIENT_API_URL}/api/events`, {
+            const response = await fetch(`${NEXT_PUBLIC_CLIENT_API_URL}/api/events`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

@@ -1,5 +1,5 @@
 import EditEventForm from "@/components/EditEventForm";
-import { API_URL } from "../../../../../config";
+import { NEXT_PUBLIC_API_URL } from "../../../../../config";
 
 type Event = {
     id: number,
@@ -22,7 +22,7 @@ export default async function Edit({ params }: any) {
 
 async function getEvent(id: string) {
     try {
-        const response = await fetch(`${API_URL}/api/events/${id}`, {
+        const response = await fetch(`${NEXT_PUBLIC_API_URL}/api/events/${id}`, {
             cache: 'no-store'
         })
 

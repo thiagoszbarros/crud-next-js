@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { RiMailSendLine } from 'react-icons/ri';
-import { API_URL } from '../../config';
+import { NEXT_PUBLIC_API_URL } from '../../config';
 
 
 type Event = {
@@ -39,7 +39,7 @@ export default async function EventsList() {
 
 async function getEvents() {
     try {
-        const response = await fetch(`${API_URL}/api/events`, {
+        const response = await fetch(`${NEXT_PUBLIC_API_URL}/api/events`, {
             cache: 'no-store'
         })
 
