@@ -37,7 +37,7 @@ export default function EditEventForm({ id, name, startDate, endDate }: any) {
 
             const data = await response.json();
             if (!response.ok) {
-                alert(data.data);
+                alert(data.data ?? data.message);
                 return;
             }
 

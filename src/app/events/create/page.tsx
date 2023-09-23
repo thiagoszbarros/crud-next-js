@@ -36,7 +36,7 @@ export default function Create() {
             const data = await response.json()
 
             if (!response.ok) {
-                alert(data.message)
+                alert(data.data ?? data.message)
                 return
             }
 

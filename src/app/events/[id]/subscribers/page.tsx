@@ -32,14 +32,13 @@ export default function SubscribersList({ params }: { params: ParsedUrlQuery }) 
             const data = await response.json();
 
             if (!response.ok) {
-                alert(data.data);
+                alert(data.data ?? data.message);
                 return;
             }
 
             const filteredSubscribers = data.data.filter((subscriber: Subscriber) =>
                 subscriber.name.toLowerCase().includes(filter.toLowerCase())
             );
-
             const offset = 10;
             const initialPage = (page - 1) * offset;
             const finalPage = initialPage + offset;

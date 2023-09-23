@@ -25,16 +25,14 @@ async function getEvent(id: string) {
         const response = await fetch(`${NEXT_PUBLIC_API_URL}/api/events/${id}`, {
             cache: 'no-store'
         })
+        const data = await response.json()
 
         if (!response.ok) {
-            alert('Houve um erro ao buscar o evento.')
+            alert(data.data ?? data.message)
             return
         }
 
-        const data = await response.json()
-        const event = data.data
-        
-        return event
+        return data.data
     } catch (error) {
         return {}
     }

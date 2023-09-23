@@ -19,7 +19,7 @@ export default function DeleteButton({ id }: any) {
         const data = await response.json()
 
         if (!response.ok) {
-            alert(data.data)
+            alert(data.data ?? data.message)
             return
         }
 

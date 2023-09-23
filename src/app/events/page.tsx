@@ -51,14 +51,13 @@ async function getEvents() {
         })
 
         const data = await response.json()
-        const events = data.data
 
         if (!response.ok) {
-            alert(data.data)
+            alert(data.data ?? data.message)
             return
         }
 
-        return events
+        return data.data
     } catch (error) {
         return []
     }
