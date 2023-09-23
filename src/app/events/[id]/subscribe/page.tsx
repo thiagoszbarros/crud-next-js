@@ -4,6 +4,8 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { NEXT_PUBLIC_CLIENT_API_URL } from "../../../../../config";
+import React from "react"
+import InputMask from "react-input-mask";
 
 export default function Subscribe({ params }: any) {
 
@@ -31,7 +33,7 @@ export default function Subscribe({ params }: any) {
                     event_id: id,
                     name: name,
                     email: email,
-                    cpf: CPF
+                    cpf: removeCpfMask(CPF)
                 })
             })
 
@@ -67,8 +69,8 @@ export default function Subscribe({ params }: any) {
                 placeholder="Seu melhor email"
                 required
             />
-            <input onChange={(e) => setCPF(e.target.value)}
-                value={CPF}
+            <InputMask
+                mask="999.999.999-99" onChange={(e) => setCPF(e.target.value)} value={CPF}
                 className="border border-slate-500 px-8 py-2"
                 type="text"
                 placeholder="Seu CPF"
@@ -83,4 +85,8 @@ export default function Subscribe({ params }: any) {
             </Link>
         </form>
     )
+}
+
+function removeCpfMask(value: string) {
+    return value.replace(/[^\d]/g, '');
 }
