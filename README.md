@@ -21,6 +21,8 @@
 
 5. Abra seu navegador e acesse `http://localhost:3001` para visualizar o aplicativo Next.js em ação.
 
+6. [Deploy](https://events-frontend-5j6sk0hzo-thiagoszbarros.vercel.app/)
+
 
 ## Contribuição
 
