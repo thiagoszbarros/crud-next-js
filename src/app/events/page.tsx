@@ -3,7 +3,7 @@ import { HiPencilAlt } from "react-icons/hi"
 import { RiMailSendLine } from 'react-icons/ri';
 import { NEXT_PUBLIC_API_URL } from "../../../config";
 import DeleteButton from "@/components/DeleteButton";
-import { warningMessage, errorMessage } from "@/components/Utils";
+import { warningMessage, errorMessage, addDateMask } from "@/components/Utils";
 
 type Event = {
     id: string,
@@ -25,8 +25,8 @@ export default async function EventsList() {
                     <div key={event.id} className='p-4 border border-slate-300 my-3 flex justify-between gap-5 items-center'>
                         <div>
                             <h2 className='font-bold text-2xl'>{event.name}</h2>
-                            <div>De {event.start_date} até {event.end_date} </div>
-                            <div>{event.status}</div>
+                            <div>De {addDateMask(event.start_date)} até {addDateMask(event.end_date)} </div>
+                            <div>{event.status ? 'Inscrições em andamento' : 'Inscrições enceradas'}</div>
                         </div>
 
                         <div className="flex gap-2">
