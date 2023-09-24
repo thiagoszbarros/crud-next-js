@@ -3,7 +3,7 @@ import { HiPencilAlt } from "react-icons/hi"
 import { RiMailSendLine } from 'react-icons/ri';
 import { NEXT_PUBLIC_API_URL } from "../../../config";
 import DeleteButton from "@/components/DeleteButton";
-import { warningMessage, errorMessage, addDateMask } from "@/components/Utils";
+import { addDateMask } from "@/components/Utils";
 
 type Event = {
     id: string,
@@ -54,19 +54,11 @@ async function getEvents() {
         const data = await response.json()
 
         if (!response.ok) {
-
-            warningMessage(data.data ?? data.message)
-            
             return
         }
 
         return data.data
     } catch (error) {
-
-        errorMessage('Houve um erro ao listar os eventos.')
-
-        setTimeout(() => { }, 3000)
-
         return []
     }
 }
