@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { RiMailSendLine } from 'react-icons/ri';
 import { NEXT_PUBLIC_API_URL } from '../../config';
 import { addDateMask } from '@/components/Utils';
+import { mockApi } from '../../mock';
 
 
 type Event = {
@@ -52,6 +53,6 @@ async function getEvents() {
 
         return data.data
     } catch (error) {
-        return []
+        return mockApi()
     }
 }

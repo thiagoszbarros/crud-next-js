@@ -6,6 +6,7 @@ import { ParsedUrlQuery } from "querystring";
 import Link from "next/link";
 import { GrLinkPrevious, GrLinkNext } from 'react-icons/gr';
 import { warningMessage, errorMessage } from "@/components/Utils";
+import { mockSubscribers } from "../../../../../mock";
 
 type Subscriber = {
     id: number;
@@ -54,7 +55,7 @@ export default function SubscribersList({ params }: { params: ParsedUrlQuery }) 
 
             setTimeout(() => { }, 3000)
 
-            setSubscribers([]);
+            setSubscribers(mockSubscribers());
         }
     }
 

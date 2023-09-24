@@ -1,5 +1,6 @@
 import EditEventForm from "@/components/EditEventForm";
 import { NEXT_PUBLIC_API_URL } from "../../../../../config";
+import { mockEvent } from "../../../../../mock";
 
 type Event = {
     id: number,
@@ -34,6 +35,6 @@ async function getEvent(id: string) {
 
         return data.data
     } catch (error) {
-        return {}
+        return mockEvent()
     }
 }
