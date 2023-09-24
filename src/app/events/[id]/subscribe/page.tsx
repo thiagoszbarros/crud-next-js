@@ -6,16 +6,26 @@ import { useState } from "react"
 import { NEXT_PUBLIC_CLIENT_API_URL } from "../../../../../config";
 import React from "react"
 import InputMask from "react-input-mask";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { successMessage, warningMessage, errorMessage } from "@/components/Utils";
 
-export default function Subscribe({ params }: any) {
+type SubscriptionParams = {
+    id: string;
+    name: string;
+    email: string;
+    cpf: string;
+}
+
+export default function Subscribe({ params }: { params: SubscriptionParams }) {
 
     const { id } = params;
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [CPF, setCPF] = useState('')
+    const [cpf, setCpf] = useState('')
     const router = useRouter()
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
         try {
@@ -33,28 +43,43 @@ export default function Subscribe({ params }: any) {
                     event_id: id,
                     name: name,
                     email: email,
-                    cpf: removeCpfMask(CPF)
+                    cpf: removecpfMask(cpf)
                 })
             })
 
             const data = await response.json()
 
             if (!response.ok) {
-                alert(data.data ?? data.message)
+
+                warningMessage(data.data ?? data.message)
+
                 return
             }
 
-            alert(data.data)
-            router.push('/')
-            router.refresh()
+            successMessage(data.data)
+
+            setTimeout(() => {
+                router.push('/events')
+                router.refresh()
+            }, 3000)
+
+            return
 
         } catch (error) {
+            errorMessage('Não foi possível realizar a inscrição no evento.')
+
+            setTimeout(() => {
+                router.push('/events')
+                router.refresh()
+            }, 3000)
+            
             return
         }
     }
 
     return (
         <form onSubmit={handleSubmit} className="flex-col gap-3 flex">
+            <ToastContainer />
             <input onChange={(e) => setName(e.target.value)}
                 value={name}
                 className="border border-slate-500 px-8 py-2"
@@ -70,10 +95,10 @@ export default function Subscribe({ params }: any) {
                 required
             />
             <InputMask
-                mask="999.999.999-99" onChange={(e) => setCPF(e.target.value)} value={CPF}
+                mask="999.999.999-99" onChange={(e) => setCpf(e.target.value)} value={cpf}
                 className="border border-slate-500 px-8 py-2"
                 type="text"
-                placeholder="Seu CPF"
+                placeholder="Seu cpf"
                 required
             />
             <button type="submit"
@@ -87,6 +112,6 @@ export default function Subscribe({ params }: any) {
     )
 }
 
-function removeCpfMask(value: string) {
+function removecpfMask(value: string) {
     return value.replace(/[^\d]/g, '');
 }

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { RiMailSendLine } from 'react-icons/ri';
 import { NEXT_PUBLIC_API_URL } from '../../config';
 import { addDateMask } from '@/components/Utils';
+import { warningMessage, errorMessage } from "@/components/Utils";
 
 
 type Event = {
@@ -47,12 +48,19 @@ async function getEvents() {
         const data = await response.json()
 
         if (!response.ok) {
-            alert(data.data ?? data.message)
+
+            warningMessage(data.data ?? data.message)
+
             return
         }
 
         return data.data
     } catch (error) {
+
+        errorMessage('Houve um erro ao listar os eventos.')
+
+        setTimeout(() => { }, 3000)
+        
         return []
     }
 }

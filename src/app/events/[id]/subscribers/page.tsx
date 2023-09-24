@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { ParsedUrlQuery } from "querystring";
 import Link from "next/link";
 import { GrLinkPrevious, GrLinkNext } from 'react-icons/gr';
+import { warningMessage, errorMessage } from "@/components/Utils";
 
 type Subscriber = {
     id: number;
@@ -32,8 +33,10 @@ export default function SubscribersList({ params }: { params: ParsedUrlQuery }) 
             const data = await response.json();
 
             if (!response.ok) {
-                alert(data.data ?? data.message);
-                return;
+                
+                warningMessage(data.data ?? data.message)
+
+                return
             }
 
             const filteredSubscribers = data.data.filter((subscriber: Subscriber) =>
@@ -46,7 +49,11 @@ export default function SubscribersList({ params }: { params: ParsedUrlQuery }) 
 
             setSubscribers(subscribersForPage);
         } catch (error) {
-            console.error("Error loading subscribers", error);
+
+            errorMessage('Houve um erro ao obter os inscritos.')
+
+            setTimeout(() => { }, 3000)
+
             setSubscribers([]);
         }
     }
