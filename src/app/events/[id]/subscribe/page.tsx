@@ -59,7 +59,7 @@ export default function Subscribe({ params }: { params: SubscriptionParams }) {
             successMessage(data.data)
 
             setTimeout(() => {
-                router.push('/events')
+                router.push('/')
                 router.refresh()
             }, 3000)
 
@@ -69,7 +69,7 @@ export default function Subscribe({ params }: { params: SubscriptionParams }) {
             errorMessage('Não foi possível realizar a inscrição no evento.')
 
             setTimeout(() => {
-                router.push('/events')
+                router.push('/')
                 router.refresh()
             }, 3000)
             
