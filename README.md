@@ -21,7 +21,7 @@
 
 5. Abra seu navegador e acesse `http://localhost:3001` para visualizar o aplicativo Next.js em ação.
 
-6. [Deploy](https://events-frontend-dun.vercel.app/)
+6. [MockUp](https://events-frontend-dun.vercel.app/)
 
 ## Contribuição
 
